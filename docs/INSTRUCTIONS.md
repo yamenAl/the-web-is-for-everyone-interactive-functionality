@@ -12,6 +12,7 @@ In het college S09W1-01-Sprintplanning-The-Web-Is-For-Everyone wordt de opdracht
 Bij deze leertaak hoort de deeltaak:
 - [Wireflow](https://github.com/fdnd-task/wireflow) (Sprint 05)
 - [UML Diagram](https://github.com/fdnd-task/uml-diagram) (Sprint 08)
+- UI States
 - [Progressive Enhancement](https://github.com/fdnd-task/progressive-enhancement)
 
 

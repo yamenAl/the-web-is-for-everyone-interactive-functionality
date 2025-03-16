@@ -4,8 +4,7 @@ Ontwerp en maak voor een opdrachtgever een interactieve toepassing die voor iede
 
 ## Context
 
-Deze leertaak hoort bij sprint 9 "The Web is for Everyone". 
-Dit is een leertaak die je uitvoert voor een opdrachtgever.
+Deze leertaak hoort bij Sprint 9 "The Web is for Everyone". Dit is een leertaak die je uitvoert voor een opdrachtgever.
 
 <!-- In het college S09W1-01-Sprintplanning-The-Web-Is-For-Everyone wordt de opdracht uitgelegd. -->
 
@@ -19,17 +18,17 @@ Bij deze leertaak hoort de deeltaak:
 
 ## Doel van deze opdracht
 
-Tim Berners-Lee, de uitvinder van het internet zei: "_The power of the Web is in its universality. Access by everyone regardless of disability is an essential aspect._"
+Tim Berners-Lee, de uitvinder van het World Wide Web zei: “_The power of the Web is in its universality. Access by everyone regardless of disability is an essential aspect._”
 
-Het doel van deze opdracht is te leren hoe je een interactieve website maakt die voor iedereen toegankelijk is.
+Het doel van deze opdracht is te leren hoe je een interactieve website maakt, die door _iedereen_ te gebruiken is.
 
 ## Werkwijze
 
-In deze sprint leer je hoe je data naar Directus kan posten met behup van een formulier, hoe je dit weer toont op de pagina, en hoe je ervoor zorgt dat dit het altijd(!) doet.
+In deze sprint leer je hoe je data naar Directus kan POSTen met behup van een formulier, hoe je dit weer toont op de pagina, en hoe je ervoor zorgt dat dit het altijd(!) doet.
 
-Deze leertaak wordt behandeld in Sprint 9. er worden verschillende workshops aangeboden:
+Deze leertaak wordt behandeld in Sprint 9. Er worden verschillende workshops aangeboden:
 
-- [Sprint planning](sprint-planning.md)
+- [Sprint Planning](sprint-planning.md)
 - [User Generated Content](user-generated-content.md)
 - [UI States](ui-states.md)
 - [Code/Design-Review - UI states](code-design-review-ui-states.md)
@@ -45,6 +44,6 @@ Deze opdracht is done als:
 
 - [ ] Jouw gebruikers kunnen iets achterlaten of toevoegen op jouw website (user generated content)
 - [ ] Je website is online gepubliceerd
-- [ ] Je hebt interactieve functionaliteit ontworpen en gemaakt met Node, Express, Liquid en een REST API en HTML, CSS en client-side JS
-- [ ] Je hebt je werk getest in verschillende browsers en devices en de test gedocumenteerd in je wiki
+- [ ] Je hebt interactieve functionaliteit ontworpen en gemaakt met NodeJS, Express, Liquid en een REST API en HTML, CSS en client-side JS
+- [ ] Je hebt je werk getest in verschillende browsers en devices en de tests gedocumenteerd in je wiki
 - [ ] Je hebt in de Readme bij 'Kenmerken' uitgelegd wat Progressive Enhancement is en hoe je dit hebt toegepast

@@ -2,7 +2,7 @@
 
 ## Sprint Planning
 
-Ontwerp en maak voor een opdrachtgever een interactieve toepassing die voor iedereen toegankelijk is.
+Instructies lezen, project plannen en sprint review verwerken.
 
 
 ### Aanpak 
@@ -21,31 +21,19 @@ House rules
 Zones in de studio 
 -->
 
-
+Vandaag ga je de repository klaarzetten en de sprint review van de vorie sprint verwerken.
 
 ## Repo klaarzetten met een projectboard
+Fork en Clone deze leertaak.
 
 ### Planning maken
+Teken met je tafel een schema op het whiteboard voor de komende weken. Lees de instructies van de workshop van vandaag goed door en bekijk het programma van Sprint 8. Neem de belangrijke momenten en opdrachten uit het programma op in het schema.
 
-### Projectboard
+### Projectboard en Sprint review verwerken
+Koppel het projectboard van de vorige sprint aan jouw repository van Sprint 8, en voeg de planning van het schema toe. Zet je issues in je nieuwe repo aan en voeg de issues uit de vorig sprint toe aan je nieuwe repo (klik op 'transfer issue')
 
+Pak de feedback van de sprint review erbij, maak issues van de taken waar je mee aan de slag wil deze sprint.
 
-## Sprint review verwerken
+## Prototypen USer Generated Content
 
-<!-- 
-## Analyseren
-
-In de analysefase inventariseer je wat er moet gebeuren om een taak uit te voeren. Je kiest een _user story_ waar je aan gaat werken en onderzoekt hoe je data gaat posten naar de server.
-
-### Sprintplanning
-1. Lees de instructies van deze leertaak zorgvuldig door
-2. Bekijk de verschillende fases van de DLC en wat je per fase gaat doen
-3. Bekijk de planning van [sprint 9](https://programma.fdnd.nl/data-driven-web/the-web-is-for-everyone) en wat je per week gaat doen
-4. Bespreek wat je aan werk verwacht en maak aantekeningen. (wat komt je bekend voor, wat heb je al vaker gedaan of wat lijkt je lastig)
-5. Kies een _user story_ over _User Generated Content_ uit de backlog van het project waar je aan gaat werken, of schrijf er zelf een
-6. Schets met je projectcoach per _user story_ hoe je data kan posten en of er (al) een POST endpoint is van de API en hoe deze werkt.
-
-#### Bronnen analyseerfase
-
-* [Wat is een REST API nou echt: het basisidee](https://blog.wearefrank.nl/wat-is-een-rest-api-nou-echt-het-basisidee)
- -->
+Nu je weet wat (ongeveer) de bedoeling is deze sprint, ga je verder met de workshop "User Generated Content".

@@ -24,7 +24,23 @@ app.engine('liquid', engine.express());
 app.set('views', './views')
 
 
-console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe. De instructies staan in de leertaak.')
+console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe.')
+
+/*
+// Zie https://expressjs.com/en/5x/api.html#app.get.method voor documentatie
+app.get('/dit-ga-je-waarschijnlijk-aanpassen', async function (request, response) {
+  
+  // Zie https://expressjs.com/en/5x/api.html#res.render voor documentatie
+  response.render('index.liquid')
+})
+
+// Zie https://expressjs.com/en/5x/api.html#app.post.method voor documentatie
+app.post('/dit-ga-je-waarschijnlijk-aanpassen', async function (request, response) {
+
+  // Zie https://expressjs.com/en/5x/api.html#res.redirect voor documentatie
+  response.redirect(303, '/dit-ga-je-waarschijnlijk-aanpassen')
+})
+*/
 
 
 // Stel het poortnummer in waar Express op moet gaan luisteren

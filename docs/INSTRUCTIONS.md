@@ -20,7 +20,7 @@ Bij deze leertaak hoort de deeltaak:
 
 Tim Berners-Lee, de uitvinder van het World Wide Web zei: “_The power of the Web is in its universality. Access by everyone regardless of disability is an essential aspect._”
 
-Het doel van deze opdracht is te leren hoe je een interactieve website maakt, die door _iedereen_ te gebruiken is.
+Het doel van deze opdracht is te leren hoe je een interactieve website maakt, die voor _iedereen_ toegankelijk is. De focus van deze sprint ligt op _Progressive Enhancement_, _Toegankelijkheid_ en testresultaten gebruiken voor het verbeteren van een ontwerp.
 
 ## Werkwijze
 

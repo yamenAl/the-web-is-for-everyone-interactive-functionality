@@ -1,8 +1,8 @@
 # Interactive functionality
 
-## Code/Design Review - POST en browsers
+## Code/Design Review - Device lab
 
-Test de POST functionaliteit en hoe verschillende browsers en devices websites renderen.
+Test jouw functionaliteit met het device lab, en leer hoe verschillende browsers en devices werken.
 
 
 ### Aanpak

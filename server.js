@@ -39,6 +39,11 @@ app.get(…, async function (request, response) {
 // Zie https://expressjs.com/en/5x/api.html#app.post.method over app.post()
 app.post(…, async function (request, response) {
 
+  // In request.body zitten alle formuliervelden die een `name` attribuut hebben in je HTML
+  console.log(request.body)
+
+  // Via een fetch() naar Directus vullen we nieuwe gegevens in
+
   // Zie https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch over fetch()
   // Zie https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify over JSON.stringify()
   // Zie https://docs.directus.io/reference/items.html#create-an-item over het toevoegen van gegevens in Directus
@@ -51,6 +56,7 @@ app.post(…, async function (request, response) {
     }
   });
 
+  // Redirect de gebruiker daarna naar een logische volgende stap
   // Zie https://expressjs.com/en/5x/api.html#res.redirect over response.redirect()
   response.redirect(303, …)
 })

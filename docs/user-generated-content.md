@@ -89,26 +89,22 @@ Neem bestanden of stukken code die je mee wilt nemen uit je vorige repository me
 
 Bouw je formulier in een Liquid view.
 
-Als je een opfrisser wilt van hoe je formulieren afhandelt, zie dan de bron uit Sprint 7.
+Als je een opfrisser wilt van hoe je formulieren afhandelt, zie dan de bronnen uit Sprint 7.
 
 ### Bronnen
 
 - [Oefenen met een POST @ Sprint 7](https://github.com/fdnd-task/connect-your-tribe-squad-page/blob/main/docs/user-generated-content.md#oefenen-met-een-post)
+- [Maak één squad page @ Sprint 7](https://github.com/fdnd-task/connect-your-tribe-squad-page/blob/main/docs/user-generated-content.md#maak-%C3%A9%C3%A9n-squad-page)
 
 
 ## Opslaan in Directus
 
-In `server.js` staat wat code uitgecomment. Gebruik deze om stap voor stap data op te slaan in Directus.
+In `server.js` staat wat code uitgecomment. Gebruik deze om stap voor stap data op te slaan in Directus. De exacte code verschilt per project en per onderwerp, dus hiervoor zul je zelf aan de slag moeten.
+
+Jullie hebben dit eerder gedaan in de team-squad-page opdracht in Sprint 7, dus pak je code daarvan erbij.
 
 ### Bronnen
 
-- https://docs.directus.io/reference/items.html#create-an-item
-- https://docs.directus.io/reference/items.html#update-an-item
 
-
-## De nieuwe data tonen
-
-
-
-### Bronnen
-
+- [Create an item @ Directus](https://docs.directus.io/reference/items.html#create-an-item)
+- [Update an item @ Directus](https://docs.directus.io/reference/items.html#update-an-item)

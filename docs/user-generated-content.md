@@ -2,19 +2,7 @@
 
 ## User Generated Content
 
-Deze workshop gaat over het POSTen en bewaren van data op de server, en hoe je dit weer kunt tonen op een pagina. We gaan ook leren hier een goed ontwerp voor te maken.
-
-
-<!-- 
-Post met NodeJS en API 
-
-Teken van de post interactie in een wireflow met  (hackable) urls, routes en data
-- [Wireflow](https://github.com/fdnd-task/wireflow) (Sprint 05)
-- [UML Diagram](https://github.com/fdnd-task/uml-diagram) (Sprint 08)
-
-
-Voorzetje geven van partials gebruiken/als de post gedaan wordt met een 303 forwarden naar de get route en dezelfde view renderen met de nieuwe data. 
--->
+Deze workshop gaat over het POSTen en bewaren van data op de server, en hoe je dit weer kunt tonen op een pagina.
 
 
 ### Aanpak
@@ -25,8 +13,10 @@ Net als bij de squad page moeten we daarvoor eerst bedenken welke interactieve f
 
 Hierna gaan we een Wireflow schetsen met nette URLs, routes aanmaken, een HTML formulier maken en de data opslaan in Directus. Je kunt daarna verder met het uitwerken van je ontwerp in code.
 
+Komende vrijdag ga je je interactie testen tijdens de code/design review.
 
-## Interactieve functionaliteit
+
+## Interactieve functionaliteit (vanaf 10:30 uur)
 
 Tot nu toe heb je een overzichtspagina en een detailpagina gemaakt voor de opdrachtgever. Je hebt hiervoor `GET` requests gebruikt. Voor je eigen routes en voor de fetches naar Directus. Hier komen deze sprint `POST` requests bij. Maar hiervoor moeten we eerst bepalen _wat_ we willen gaan maken.
 
@@ -36,11 +26,14 @@ Overleg met studenten die dezelfde opdrachtgever hebben welke functionaliteit je
 
 Maak een snelle schets van jouw idee, zodat je deze kunt overbrengen aan een ander aan je tafel. Deze leertaak is individueel, maar probeer samen in te schatten of een bepaald idee haalbaar is, en hoe. Analyseer samen jullie Directus database, en noteer voor jezelf mogelijke problemen en knelpunten die je verwacht voor jouw idee. Als je een aanpassing in de database nodig hebt, kunnen we dat voor jullie doen, net als bij de WHOIS API. Het is hiervoor handig als je zelf al bedenkt wat je nog nodig hebt. Als jouw idee misschien te ingewikkeld is, hou dan een ander idee achter de hand. Overleg uiteindelijk met een docent over de haalbaarheid.
 
-Als je een aanpassing in de database nodig hebt, en je hebt met een docent overlegd, maak dan een issue aan op jouw repository. Leg hierin kort uit wat je nodig hebt, en voeg je schets(en) toe. Plaats een link naar dit issue op Teams, of tag in je issue een docent die dit op kan pakken. Het kan even duren voordat dit gedaan is, maar je kunt alvast verder.
+Schrijf voor jouw functionaliteit een User Story, en maak hiervoor een nieuw issue aan. Gebruik hiervoor eventueel de workshop uit Sprint 5. Leg in je issue kort uit wat je nodig gaat hebben, en voeg je eerste schets(en) toe.
+
+Heb je voor jouw functionaliteit een aanpassing in de database nodig? Plaats dan een link naar dit issue op Teams, of tag in je issue een docent die dit op kan pakken. Het kan even duren voordat dit gedaan is, maar je kunt alvast verder met de volgende stappen.
 
 ### Bronnen
 
 - [GET vs POST @ Sprint 7](https://github.com/fdnd-task/connect-your-tribe-squad-page/blob/main/docs/user-generated-content.md#get-vs-post)
+- [User Story @ Sprint 5](https://github.com/fdnd-task/fix-the-flow-interactive-website/blob/main/docs/user-interface-design.md#user-story)
 
 
 ## Progressive Enhancement
@@ -57,12 +50,6 @@ Stap 2, de simpelste techniek hiervoor, is in dit geval een `<form>` in HTML. Di
 
 Later deze sprint (en in Sprint 11 nog meer) gaan we deze interactie uitbreiden met extra _enhancements_. Voor nu richten we ons op de eerste twee stappen van _Progressive Enhancement_, zodat we die goed onder de knie krijgen.
 
-Als je een opfrisser wilt van hoe je formulieren afhandelt, zie dan de bron uit Sprint 7.
-
-### Bronnen
-
-- [Oefenen met een POST @ Sprint 7](https://github.com/fdnd-task/connect-your-tribe-squad-page/blob/main/docs/user-generated-content.md#oefenen-met-een-post)
-
 
 ## Wireflow
 
@@ -74,15 +61,21 @@ Annoteer je Wireflow met hints voor je dynamische data, en bedenk ook hoe je aan
 
 💪 Na het afhandelen van een `POST`, wil je bezoekers doorsturen (_redirecten_, met een `303` _status code_); kun je dat ook aangeven in je Wireflow?
 
+Voeg je Wireflow toe aan je User Story issue en vraag hierop feedback.
+
+We gaan straks verder met het aanmaken van routes, het maken van het formulier, en het opslaan van gegevens in Directus. Vanmiddag is er een practicum om je hierbij te helpen.
+
 ### Bronnen
 
 - [Wireflow schetsen @ Sprint 7](https://github.com/fdnd-task/connect-your-tribe-squad-page/blob/main/docs/filteren-en-sorteren.md#wireflow-schetsen)
 - [Wireflow en dynamische data @ Sprint 8](https://github.com/fdnd-task/server-side-rendering-server-side-website/blob/main/docs/templating-met-json.md#wireflow-en-dynamische-data)
 
 
-## Routes
+## Routes (vanaf 12:00)
 
-Gebruik de hints uit je Wireflow schets en de bronnen hieronder om jouw `POST` route(s) aan te maken in `server.js`.
+Gebruik de hints uit je Wireflow schets en de bronnen hieronder om jouw `POST` route(s) aan te maken in `server.js`. Je kunt hiervoor nieuwe issues aanmaken.
+
+Neem bestanden of stukken code die je mee wilt nemen uit je vorige repository mee. Misschien wil je wel een deel opnieuw gaan bouwen.
 
 ### Bronnen
 
@@ -96,19 +89,26 @@ Gebruik de hints uit je Wireflow schets en de bronnen hieronder om jouw `POST` r
 
 Bouw je formulier in een Liquid view.
 
-[TODO]
+Als je een opfrisser wilt van hoe je formulieren afhandelt, zie dan de bron uit Sprint 7.
 
 ### Bronnen
 
-[TODO]
+- [Oefenen met een POST @ Sprint 7](https://github.com/fdnd-task/connect-your-tribe-squad-page/blob/main/docs/user-generated-content.md#oefenen-met-een-post)
+
 
 ## Opslaan in Directus
 
-In `server.js` staat een voorbeeld uitgecomment.
-
-[TODO]
+In `server.js` staat wat code uitgecomment. Gebruik deze om stap voor stap data op te slaan in Directus.
 
 ### Bronnen
 
 - https://docs.directus.io/reference/items.html#create-an-item
 - https://docs.directus.io/reference/items.html#update-an-item
+
+
+## De nieuwe data tonen
+
+
+
+### Bronnen
+

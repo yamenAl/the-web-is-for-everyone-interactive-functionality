@@ -117,5 +117,5 @@ app.listen(app.get('port'), function () {
 
 //404 error send to index
 app.use((req, res, next) => {
-  res.status(404).redirect('/'); 
-});
+  res.status(404).render("error.liquid")
+})

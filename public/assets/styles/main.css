@@ -1,0 +1,168 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    box-sizing: border-box;
+    max-width: 100%;
+}
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    scroll-behavior: smooth; 
+}
+/* Mobile-first */
+main {
+    display: grid;
+    grid-template-rows: auto;
+    gap: 2em; 
+    padding: 2rem;
+    padding-bottom: 15vh; 
+    width: 100%;
+    box-sizing: border-box;
+}
+.top-view {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.top-view h1,
+.top-view p {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+}
+
+.top-view h1 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.top-view p {
+    font-size: 1.2rem;
+}
+
+
+.top-view h1,
+.top-view p {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+}
+
+.top-view h1 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.top-view p {
+    font-size: 1.2rem;
+    color: #ccc;
+}
+.main-rouwtaak-icon{
+    width: 100%;
+}
+
+.top-icons {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    width: 100%;
+}
+
+/* rouwtaak icon */
+.top-icons img {
+    width: 100%; 
+    height: auto;
+    z-index: -1;
+}
+
+
+
+.rouwtaak-card {
+    border: 0.5em  solid var(--secondary-color); 
+    border-radius: 1.5em;
+    max-width: 90%;
+    
+}
+.rouwtaak-card {
+    margin: 0; /* Removes margin */
+  
+}
+.rouwtaak-img {
+    border-radius: 1em 1em 0 0;
+    width: 100%; /* Keep full width */
+    height: 10em; /* Adjust height to make it shorter */
+    object-fit: cover; /* Ensures the image fills the space without stretching */
+    overflow: hidden; /* Ensures the border-radius applies properly */
+    display: block; /* Prevents inline spacing issues */
+    margin: 0; /* Removes any default margin */
+    padding: 0; 
+}
+
+/*need work start button*/
+.start-oefening-btn{
+    background-color: black;
+    color: brown;
+}
+.inline {
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+}
+
+
+
+
+p{
+    color: var(--color-gray);
+    font-family: var(--details-font);
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    background-color: var(--background-color);
+    text-align: center;
+    padding: 1em;
+    z-index: 101;
+    display: inline;
+    li {
+        display: inline;
+        margin-right: 5em;
+    } 
+}
+
+
+
+
+
+
+
+/* tablet */
+
+@media (min-width: 48em) {
+    *{
+    }
+
+
+}
+/* desktops */
+@media (min-width: 64em) {
+
+    body{
+        font-size: 1.2rem;
+    }
+  
+}

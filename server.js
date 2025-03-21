@@ -8,6 +8,9 @@ import { Liquid } from 'liquidjs';
 
 const apiTasks = "https://fdnd-agency.directus.app/items/dropandheal_task/?fields=id,*";
 const apiExercises = "https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=id,*";
+const apiMessages = "https://fdnd-agency.directus.app/items/dropandheal_messages";
+
+
 const specificTaskApi = 'https://fdnd-agency.directus.app/items/dropandheal_task/?filter={"id":1}';
 const specificExerciseApi = 'https://fdnd-agency.directus.app/items/dropandheal_exercise/?filter={"id":1}';
 const exerciseFilteredApi = 'https://fdnd-agency.directus.app/items/dropandheal_exercise/?filter={"task":1}&fields=id,task,title,description,image';
@@ -17,6 +20,7 @@ const exerciseFilteredApi = 'https://fdnd-agency.directus.app/items/dropandheal_
 // Doe een fetch naar de data die je nodig hebt
 const tasksResponse = await fetch(apiTasks);
 const exercisesResponse = await fetch(apiExercises);
+const messagesResponse = await fetch(apiMessages);
 // Fetch specific (id = 1)
 const specificTaskResponse = await fetch(specificTaskApi);
 const specificExerciseResponse = await fetch(specificExerciseApi);
@@ -27,6 +31,9 @@ const exerciseFilteredResponse = await fetch(exerciseFilteredApi);
 // Lees van de response van die fetch het JSON object in, waar we iets mee kunnen doen
 const tasksData = await tasksResponse.json();
 const exercisesData = await exercisesResponse.json();
+const messagesData = await messagesResponse.json();
+
+
 const specificTaskData = await specificTaskResponse.json();
 const specificExerciseData = await specificExerciseResponse.json();
 const exerciseFilterData = await exerciseFilteredResponse.json();
@@ -43,6 +50,7 @@ const exerciseObject = Array.isArray(specificExerciseData.data) ? specificExerci
 
 // Maak een nieuwe Express applicatie aan, waarin we de server configureren
 const app = express()
+app.use(express.urlencoded({extended: true}))
 
 // Gebruik de map 'public' voor statische bestanden (resources zoals CSS, JavaScript, afbeeldingen en fonts)
 // Bestanden in deze map kunnen dus door de browser gebruikt worden
@@ -80,6 +88,16 @@ app.get('/header', async function (request, response) {
       exerciseObject: exerciseObject // First specific exercise object
   })
 })
+app.get('/test', async function (request, response) {
+  // Geef hier eventueel data aan mee
+
+    response.render('test.liquid', {
+      task: tasksData.data, 
+      taskObject: taskObject, 
+
+      exerciseObject: exerciseObject // First specific exercise object
+  })
+})
 
 app.get('/het-verlies-aanvaarden', async function (request, response) {
   // Geef hier eventueel data aan mee
@@ -95,7 +113,31 @@ app.get('/het-verlies-aanvaarden', async function (request, response) {
       exerciseObject: exerciseObject // First specific exercise object
   })
 })
+app.get('/community-drops', async function (request, response) {
+ 
+  response.render('community-drops.liquid', {
+    title: "community-drops",
+    messages: messagesData.data,
+  })
+})
 
+app.post('/community-drops', async function (request, response) {
+
+  await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
+    method: 'POST',
+    body: JSON.stringify({
+      from: request.body.from,
+      exercise: request.params.id, 
+      text: request.body.text
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+ // Redirect de gebruiker daarna naar een logische volgende stap
+  response.redirect(303, '/community-drops');
+})
+console.log('Time: ', Date.now())
 
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
 // Hier doen we nu nog niets mee, maar je kunt er mee spelen als je wilt
@@ -119,3 +161,5 @@ app.listen(app.get('port'), function () {
 app.use((req, res, next) => {
   res.status(404).render("error.liquid")
 })
+
+

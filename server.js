@@ -5,51 +5,23 @@ import express from 'express'
 // Importeer de Liquid package (ook als dependency via npm geïnstalleerd)
 import { Liquid } from 'liquidjs';
 
-
-const apiTasks = "https://fdnd-agency.directus.app/items/dropandheal_task/?fields=id,*";
-const apiExercises = "https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=id,*";
+const apiTasks = "https://fdnd-agency.directus.app/items/dropandheal_task";
+const apiExercises = "https://fdnd-agency.directus.app/items/dropandheal_exercise";
 const apiMessages = "https://fdnd-agency.directus.app/items/dropandheal_messages";
 
-
-const specificTaskApi = 'https://fdnd-agency.directus.app/items/dropandheal_task/?filter={"id":1}';
-const specificExerciseApi = 'https://fdnd-agency.directus.app/items/dropandheal_exercise/?filter={"id":1}';
-const exerciseFilteredApi = 'https://fdnd-agency.directus.app/items/dropandheal_exercise/?filter={"task":1}&fields=id,task,title,description,image';
-
-
-//console.log('Hieronder moet je waarschijnlijk nog wat veranderen')
 // Doe een fetch naar de data die je nodig hebt
 const tasksResponse = await fetch(apiTasks);
 const exercisesResponse = await fetch(apiExercises);
 const messagesResponse = await fetch(apiMessages);
-// Fetch specific (id = 1)
-const specificTaskResponse = await fetch(specificTaskApi);
-const specificExerciseResponse = await fetch(specificExerciseApi);
-const exerciseFilteredResponse = await fetch(exerciseFilteredApi);
 
-
-
-// Lees van de response van die fetch het JSON object in, waar we iets mee kunnen doen
 const tasksData = await tasksResponse.json();
 const exercisesData = await exercisesResponse.json();
 const messagesData = await messagesResponse.json();
 
-
-const specificTaskData = await specificTaskResponse.json();
-const specificExerciseData = await specificExerciseResponse.json();
-const exerciseFilterData = await exerciseFilteredResponse.json();
-
-
-// making exercisey snigel object not array
-const taskObject = Array.isArray(specificTaskData.data) ? specificTaskData.data[0] : specificTaskData.data;
-const exerciseObject = Array.isArray(specificExerciseData.data) ? specificExerciseData.data[0] : specificExerciseData.data;
-
-
-
-// Controleer eventueel de data in je console
-// (Let op: dit is _niet_ de console van je browser, maar van NodeJS, in je terminal)
-
 // Maak een nieuwe Express applicatie aan, waarin we de server configureren
 const app = express()
+
+// Maak werken met data uit formulieren iets prettiger
 app.use(express.urlencoded({extended: true}))
 
 // Gebruik de map 'public' voor statische bestanden (resources zoals CSS, JavaScript, afbeeldingen en fonts)
@@ -58,108 +30,83 @@ app.use(express.static('public'))
 
 // Stel Liquid in als 'view engine'
 const engine = new Liquid();
-app.engine('liquid', engine.express()); 
+app.engine('liquid', engine.express());
 
 // Stel de map met Liquid templates in
 // Let op: de browser kan deze bestanden niet rechtstreeks laden (zoals voorheen met HTML bestanden)
 app.set('views', './views')
 
-app.get('/', async function (request, response) {
-  // Render index.liquid uit de Views map
-  // Geef hier eventueel data aan mee
+
+console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe.')
+
+app.get('/:id', async function (request, response) {
+  const taskId = request.params.id;
+  const exercisesId = request.params.exercise;
+
+
+  const specificTaskResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_task/?filter={"id":${taskId}}`);
+  const specificExercisesResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?filter={"id":${exercisesId}}`);
+  
+  const specificExerciseData = await specificExercisesResponse.json();
+  const exerciseObject = Array.isArray(specificExerciseData.data) ? specificExerciseData.data[0] : specificExerciseData.data;
+
+
+  const specificTaskData = await specificTaskResponse.json();
+  const taskObject = Array.isArray(specificTaskData.data) ? specificTaskData.data[0] : specificTaskData.data;
+
   response.render('index.liquid', {
-    title: 'index',
+    title: 'Rouw-taak',
     tasks: tasksData.data, 
-    exercises: exercisesData.data, 
-    taskObject: taskObject, 
-    exerciseObject: exerciseObject 
-  })
+    exercises: exercisesData.data,
+    exerciseObject: exerciseObject, 
+    taskObject: taskObject
+
+  });
+});
+
+/*
+// Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
+app.get(…, async function (request, response) {
   
+  // Zie https://expressjs.com/en/5x/api.html#res.render over response.render()
+  response.render(…)
 })
+*/
 
-//console.log(exercisey)
-app.get('/header', async function (request, response) {
-  // Geef hier eventueel data aan mee
+/*
+// Zie https://expressjs.com/en/5x/api.html#app.post.method over app.post()
+app.post(…, async function (request, response) {
 
-    response.render('partials/header.liquid', {
-      task: tasksData.data, 
-      taskObject: taskObject, 
+  // In request.body zitten alle formuliervelden die een `name` attribuut hebben in je HTML
+  console.log(request.body)
 
-      exerciseObject: exerciseObject // First specific exercise object
-  })
-})
-app.get('/test', async function (request, response) {
-  // Geef hier eventueel data aan mee
+  // Via een fetch() naar Directus vullen we nieuwe gegevens in
 
-    response.render('test.liquid', {
-      task: tasksData.data, 
-      taskObject: taskObject, 
-
-      exerciseObject: exerciseObject // First specific exercise object
-  })
-})
-
-app.get('/het-verlies-aanvaarden', async function (request, response) {
-  // Geef hier eventueel data aan mee
-  //only this const i take it from example from google
-  const filteredExercises = exercisesData.data.filter(exercise => exercise.task === 1);
-  
-  
-    response.render('het-verlies-aanvaarden.liquid', {
-      title: 'rouwtaak-blue',
-      tasks: tasksData.data, 
-      exercises: exercisesData.data, 
-      exercisesFilter: filteredExercises, 
-      exerciseObject: exerciseObject // First specific exercise object
-  })
-})
-app.get('/community-drops', async function (request, response) {
- 
-  response.render('community-drops.liquid', {
-    title: "community-drops",
-    messages: messagesData.data,
-  })
-})
-
-app.post('/community-drops', async function (request, response) {
-
-  await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
-    method: 'POST',
-    body: JSON.stringify({
-      from: request.body.from,
-      exercise: request.params.id, 
-      text: request.body.text
-    }),
+  // Zie https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch over fetch()
+  // Zie https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify over JSON.stringify()
+  // Zie https://docs.directus.io/reference/items.html#create-an-item over het toevoegen van gegevens in Directus
+  // Zie https://docs.directus.io/reference/items.html#update-an-item over het veranderen van gegevens in Directus
+  await fetch(…, {
+    method: …,
+    body: JSON.stringify(…),
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
     }
   });
- // Redirect de gebruiker daarna naar een logische volgende stap
-  response.redirect(303, '/community-drops');
-})
-console.log('Time: ', Date.now())
 
-// Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
-// Hier doen we nu nog niets mee, maar je kunt er mee spelen als je wilt
-app.post('/', async function (request, response) {
-  // Je zou hier data kunnen opslaan, of veranderen, of wat je maar wilt
-  // Er is nog geen afhandeling van een POST, dus stuur de bezoeker terug naar /
-  response.redirect(303, '/')
+  // Redirect de gebruiker daarna naar een logische volgende stap
+  // Zie https://expressjs.com/en/5x/api.html#res.redirect over response.redirect()
+  response.redirect(303, …)
 })
+*/
+
 
 // Stel het poortnummer in waar Express op moet gaan luisteren
-// Lokaal is dit poort 8000, als dit ergens gehost wordt, is het waarschijnlijk poort 80
+// Lokaal is dit poort 8000; als deze applicatie ergens gehost wordt, waarschijnlijk poort 80
 app.set('port', process.env.PORT || 8000)
 
-// Start Express op, haal daarbij het zojuist ingestelde poortnummer op
+// Start Express op, gebruik daarbij het zojuist ingestelde poortnummer op
 app.listen(app.get('port'), function () {
-  // Toon een bericht in de console en geef het poortnummer door
-  console.log(`let's go application started on http://localhost:${app.get('port')}`)
+  // Toon een bericht in de console
+  console.log(`Daarna kun je via http://localhost:${app.get('port')}/ jouw interactieve website bekijken.\n\nThe Web is for Everyone. Maak mooie dingen 🙂`)
 })
-
-//404 error send to index
-app.use((req, res, next) => {
-  res.status(404).render("error.liquid")
-})
-
-

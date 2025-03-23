@@ -1,11 +1,29 @@
 <header>
-  <div class="header-top">
-    <h1>{{ taskObject.title }}</h1>
-    <button class="dropdown-btn" alt="drop rouwtaak menu">
-      <img src="/assets/icons/drop-down-arrow.svg" alt="drop down menu">
-    </button>
-  </div>
-  
+  <section>
+    {% for title in tasks %}
+      {% if title.id == taskObject.id %}
+        <h1 >{{ title.title }}</h1>
+      {% endif %}
+    {% endfor %}
+  </section>
+  <nav class="navbar">
+    <span class="hum-menu" aria-hidden="true"><img src="/assets/icons/drop-down-arrow.svg" alt="drop down menu"></span>
+      <ul class="nav-list">
+        {% for exercise in tasks %}
+          {% if exercise.id %}
+            <ul class="nav-list"><li><a 
+            class="nav-links xs" 
+            href="/{{ exercise.id }}" 
+            data-title="{{ exercise.title }}"
+            onclick="updateTitle(event, this)"
+          >
+            <img src="/assets/photos/rouwtaak-{{ exercise.theme }}.svg" alt="">
+            <p>{{ exercise.title }}</p>
+          </a></li></ul>
+          {% endif %}
+        {% endfor %}
+      </ul>
+  </nav>
   <section class="progress-container">
     <progress value="10" max="100"></progress>
     <p>10% volbracht</p>

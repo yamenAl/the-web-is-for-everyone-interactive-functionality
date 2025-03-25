@@ -10,13 +10,16 @@
             <p>3 oefeningen open vandaag</p>
     </article>
 
-    <article >
+    <article class="intro">
         <p>Schrijven</p>
         {% for exercise in exercises %}
             {% if taskObject.exercise contains exercise.id %}
                 <ul class="rouwtaak-card"><li>
                     <a href="/het-verlies-aanvaarden"><img src="https://fdnd-agency.directus.app/assets/{{ exercise.image }}" class="{{ exercise.title }} img">
+                    <p>{{ exercise.id }}</p>
                     <p>{{ exercise.title }}</p>
+
+                <a class="them-{{ task.them }}" href="/exercise/{{ exercise.id }}">start oefening</a>
                 </li>
                 <img src="/assets/icons/community-drops-color.svg" alt="community-drops icon">
                 <p>47 community drops</p>

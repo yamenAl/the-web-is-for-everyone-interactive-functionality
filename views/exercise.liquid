@@ -1,0 +1,43 @@
+{% render 'partials/head.liquid' %}
+<main>
+   
+
+    <article >
+        <button>X</button>  
+        {% for exercise in specificExercise %}
+            <img src="https://fdnd-agency.directus.app/assets/{{ exercise.image.id }}" alt="{{ exercise.title }} foto">
+        {% endfor %}
+        {% for messageId in specificExercise %}
+            <a href="/community-drops/{{ messageId.id }}">start {{ messageId.id }}</a>
+          {% endfor %}
+
+        <article class="rouwtaak-card">
+            <ul class="inline">
+                <li class="inline"><p>Schrijven</p>|</li>
+                <li class="inline">
+                    <img src="/assets/icons/time.svg" alt="time icon">
+                    <p>25 min</p>
+                </li>
+                <li class="inline">
+                    <img src="/assets/icons/community-drops-color.svg" alt="community-drops icon">
+                    <p>47 community drops</p> 
+                </li>
+            </ul>
+        </article>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        {% for exercise in specificExercise %}
+            <section>
+              <h1>{{ exercise.title }}</h1>
+              <p>{{ exercise.description }}</p>
+            </section>
+          {% endfor %}
+    </article>
+</main>
+{% render 'partials/footer.liquid' %}
+{% render 'partials/foot.liquid' %}
+

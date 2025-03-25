@@ -6,6 +6,10 @@
       {% endif %}
     {% endfor %}
   </section>
+  <section class="progress-container">
+    <progress value="10" max="100"></progress>
+    <p>10% volbracht</p>
+  </section>
   <nav class="navbar">
     <span class="hum-menu" aria-hidden="true"><img src="/assets/icons/drop-down-arrow.svg" alt="drop down menu"></span>
       <ul class="nav-list">
@@ -17,15 +21,12 @@
             data-title="{{ exercise.title }}"
             onclick="updateTitle(event, this)"
           >
-            <img src="/assets/photos/rouwtaak-{{ exercise.theme }}.svg" alt="">
+            <img src="/assets/photos/rouwtaak-{{ exercise.theme }}.svg" alt="{{ exercise.title }} icon">
             <p>{{ exercise.title }}</p>
           </a></li></ul>
           {% endif %}
         {% endfor %}
       </ul>
   </nav>
-  <section class="progress-container">
-    <progress value="10" max="100"></progress>
-    <p>10% volbracht</p>
-  </section>
+ 
 </header>

@@ -3,32 +3,46 @@
 
 
 <article>
-  {% for message in messages %}
-        {% if message.text %}
-            <article class="bericht">
-                    <div class="bericht-info">
-                        <h3>{{ message.from }}</h3>
-                        <p>{{ message.exercise }}</p>
-
-
-                        <p>Op {{ message.date_created | date: "%-d %B %H:%M" }}</p>
-
-                    </div>
-                <p class="bericht-text">
-                    {{ message.text }}
-                </p>
-            </article>   
-        {% endif %}
+    <ul>
+        <li>
+            {% for message in messages %}
+                {% if message.text %}
+                    <article class="bericht">
+                            <div class="bericht-info">
+                                <h3>{{ message.from }}</h3>
+                                <p>{{ message.exercise }}</p>
+        
+        
+                                <p>Op {{ message.date_created | date: "%-d %B %H:%M" }}</p>
+        
+                            </div>
+                        <p class="bericht-text">
+                            {{ message.text }}
+                        </p>
+                    </article>   
+                {% endif %}
+               
+                </article>
+            {% endfor %}  
+        </li>
+    </ul>
+    <article>
+        
+    {% for message in specificmessage %}
+        <form method="POST" action="/community-drops/{{ message.id }}">
+    
+        <label>Naam</label>
+        <input type="hidden" name="exercise" value="{{ message.id }}">
+        <input type="text" name="from" placeholder="name" required>
+        <label>Uw Bericht</label>
+        <textarea name="text"  placeholder="Deel UW ervaring met ons.!!" required></textarea>
+        <button type="submit">Ervaring Delen</button>
+        </form>
     {% endfor %}  
-</article>
-<article>
-    <form method="post" action="/community-drops">
-    <label>Naam</label>
-    <input type="text" name="from" placeholder="name" required>
-    <label>Uw Bericht</label>
-    <textarea name="text"  placeholder="Deel UW ervaring met ons.!!" required></textarea>
-    <button type="submit">Ervaring Delen</button>
-</form>
+        
+    
+
+
 </article>
 
      

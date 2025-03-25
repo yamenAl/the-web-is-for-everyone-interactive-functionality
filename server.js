@@ -55,7 +55,7 @@ app.get('/:id', async function (request, response) {
   const taskObject = Array.isArray(specificTaskData.data) ? specificTaskData.data[0] : specificTaskData.data;
 
   response.render('index.liquid', {
-    title: 'Rouw-taak',
+    title: 'index',
     tasks: tasksData.data, 
     exercises: exercisesData.data,
     exerciseObject: exerciseObject, 
@@ -63,6 +63,59 @@ app.get('/:id', async function (request, response) {
 
   });
 });
+
+
+
+
+
+
+
+
+app.get('/exercise/:id', async function (request, response) {
+  const exerciseId = request.params.id;
+  const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
+  const exerciseResponseJSON = await exerciseResponse.json()
+
+  response.render('exercise.liquid', {
+    exercises: exercisesData.data,
+
+    specificExercise: exerciseResponseJSON.data
+
+   });
+});
+
+app.get('/community-drops/:id', async function (request, response) {
+  const messagesId = request.params.id;
+  const messagesIdResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages/?fields=*.*&filter={"id":"${messagesId}"}&limit=1`)
+  const messagesResponseJSON = await messagesIdResponse.json()
+
+  const exerciseId = request.params.id;
+  const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
+  const exerciseResponseJSON = await exerciseResponse.json()
+  response.render('community-drops.liquid', {
+    title: "community-drops",
+    specificmessage: messagesResponseJSON.data,
+    specificexercise:exerciseResponseJSON.data,
+    messages: messagesData.data
+  })
+})
+
+app.post('/community-drops/:id', async function (request, response) {
+
+  await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
+    method: 'POST',
+    body: JSON.stringify({
+      from: request.body.from,
+      exercise: request.body.exercise, 
+      text: request.body.text
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+ // Redirect de gebruiker daarna naar een logische volgende stap
+  response.redirect(303, '/community-drops');
+})
 
 /*
 // Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
@@ -109,4 +162,9 @@ app.set('port', process.env.PORT || 8000)
 app.listen(app.get('port'), function () {
   // Toon een bericht in de console
   console.log(`Daarna kun je via http://localhost:${app.get('port')}/ jouw interactieve website bekijken.\n\nThe Web is for Everyone. Maak mooie dingen 🙂`)
+}) 
+
+//error page
+app.use((req, res, next) => {
+  res.status(404).render("error.liquid")
 })

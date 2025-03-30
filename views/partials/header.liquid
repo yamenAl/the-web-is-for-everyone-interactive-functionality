@@ -1,4 +1,5 @@
 <header>
+
   <section>
     {% for title in tasks %}
       {% if title.id == taskObject.id %}
@@ -6,27 +7,41 @@
       {% endif %}
     {% endfor %}
   </section>
-  <section class="progress-container">
+
+  <article class="progress-container">
     <progress value="10" max="100"></progress>
     <p>10% volbracht</p>
-  </section>
-  <nav class="navbar">
-    <span class="hum-menu" aria-hidden="true"><img src="/assets/icons/drop-down-arrow.svg" alt="drop down menu"></span>
-      <ul class="nav-list">
-        {% for exercise in tasks %}
-          {% if exercise.id %}
-            <ul class="nav-list"><li><a 
-            class="nav-links xs" 
-            href="/{{ exercise.id }}" 
-            data-title="{{ exercise.title }}"
-            onclick="updateTitle(event, this)"
-          >
-            <img src="/assets/photos/rouwtaak-{{ exercise.theme }}.svg" alt="{{ exercise.title }} icon">
-            <p>{{ exercise.title }}</p>
-          </a></li></ul>
-          {% endif %}
-        {% endfor %}
-      </ul>
+  </article>
+
+  <a class="menu-toggle fdnd-button">Menu</a>
+  <nav class="menu">
+    <ul class="nav-list">
+
+      <li class="menu-close">
+        <a href="#">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="#FFFF" xmlns="http://www.w3.org/2000/svg">
+            <title>close</title>
+            <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12l-4.89 4.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4z"/>
+          </svg>
+        </a>
+      </li>
+  
+      {% for exercise in tasks %}
+        {% if exercise.id %}
+          <li>
+            <a 
+              class="nav-links xs" 
+              href="/{{ exercise.id }}" 
+              data-title="{{ exercise.title }}"
+            >
+              <img src="/assets/photos/rouwtaak-{{ exercise.theme }}.svg" alt="{{ exercise.title }} icon">
+              <p>{{ exercise.title }}</p>
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
   </nav>
+
  
 </header>

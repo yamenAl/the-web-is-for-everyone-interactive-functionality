@@ -1,36 +1,32 @@
 {% render 'partials/head.liquid' %}
+<main>
+    <h1>{{ specificexercise.test }}</h1>
+   
 
+    <h2>Berichten bij oefening {{ exercise.title }}</h2>
 
+    {% for message in messagesFilter %}
+      <article class="rouwtaak-card">
+        
+        {% if taskObject %}
+            <span class="them-{{ taskObject.theme }}">I</span>
+        {% endif %}
+        <h3>{{ message.from }}</h3>
+        <p>{{ message.exercise }}</p>
+        <p>Op {{ message.date_created | date: "%-d %B %H:%M" }}</p>
+        <p class="">
+            {{ message.text }}
+        </p>
+      </article>
+      <form method="POST" action="/community-drops/{{ message.id }}">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="hidden" name="messageId" value="{{ message.id }}">
+      <button type="submit" onclick="return confirm('Weet je zeker dat je dit bericht wilt verwijderen?');">Verwijder bericht</button>
+      </form>
+    {% endfor %}
 
-<article>
-    <ul>
-        <li>
-            {% for message in messages %}
-                {% if message.text %}
-                    <article class="bericht">
-                            <div class="bericht-info">
-                                <h3>{{ message.from }}</h3>
-                                <p>{{ message.exercise }}</p>
-        
-        
-                                <p>Op {{ message.date_created | date: "%-d %B %H:%M" }}</p>
-        
-                            </div>
-                        <p class="bericht-text">
-                            {{ message.text }}
-                        </p>
-                    </article>   
-                {% endif %}
-               
-                </article>
-            {% endfor %}  
-        </li>
-    </ul>
-    <article>
-        
     {% for message in specificmessage %}
-        <form method="POST" action="/community-drops/{{ message.id }}">
-    
+        <form method="POST" action="/community-drops/{{ message.exercise }}">
         <label>Naam</label>
         <input type="hidden" name="exercise" value="{{ message.id }}">
         <input type="text" name="from" placeholder="name" required>
@@ -38,14 +34,11 @@
         <textarea name="text"  placeholder="Deel UW ervaring met ons.!!" required></textarea>
         <button type="submit">Ervaring Delen</button>
         </form>
-    {% endfor %}  
-        
+    {% endfor %}       
     
+</main>
 
 
-</article>
 
-     
-</section>
 
 {% render 'partials/foot.liquid' %}

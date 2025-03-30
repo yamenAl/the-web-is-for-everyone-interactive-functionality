@@ -1,41 +1,72 @@
+
 header {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    background-color: var(--background-color);
     gap: 0.5rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background-color:var(--background-color); 
-    color: var(--color-white); 
-}
-
-.header-top {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-}
+    justify-content: center;
+    border-bottom: var(--border);
+    padding: 20px;
+  }
+  
+  header p {
+    font-size: 0.625rem;
+  }
+  
+  .menu-toggle {
+    background-color: var(--blue);
+    color: white;
+    padding: 0.5em 1.2em;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    justify-self: center;
+  }
+  
+  .menu {
+    display: none; 
+    background-color: var(--green);
+    padding: 1.5em 1em;
+    margin-top: 0;
+    box-sizing: border-box;
+    grid-template-rows: auto;
+    justify-content: center;
+  }
+  
 
+  .menu.open {
+    display: grid;
+  }
+  
 
-.progress-container {
-    display: flex;
+  .menu ul {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(50px, 1fr);
+    gap: 1rem;
+    list-style: none;
+    justify-items: center;
     align-items: center;
-    gap: 0.5rem;
-}
+    overflow-x: auto;
+  }
+  
 
-progress {
-    width: 100%;
-    height: 4px;
-    border-radius: 5px;
-    background:var(--background-color); 
-    appearance: none;
-}
-
-
-progress::-webkit-progress-value {
-    background: var(--btn-color-rouwtaak1); 
-    border-radius: 5px;
-}
-
-.progress-container p {
-    font-size: 0.9rem;
-    color: var(--color-gray); /
-}
+  .menu li a {
+    display: block;
+    padding: 0.5em 1em;
+    background-color: white;
+    color: var(--blue);
+    font-size: 1em;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+  }
+  
+  .menu li a:hover {
+    background-color: var(--blue);
+    color: var(--green);
+  }

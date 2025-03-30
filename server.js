@@ -162,7 +162,38 @@ app.post('/community-drops/:id', async function (request, response) {
   response.redirect(303, '/community-drops');
 })
 
+//delete check this again
+app.post('/community-drops', async function (request, response) {
+  //this Const ask chatgpt about
+  const { _method, messageId, from, text, exercise } = request.body;
 
+  if (_method === 'DELETE') {
+    if (messageId) {
+      await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages/${messageId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        }
+      });
+    }
+    return response.redirect(303, '/community-drops');
+  }
+
+
+  await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
+    method: 'POST',
+    body: JSON.stringify({
+      from,
+      text,
+      exercise
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+
+  response.redirect(303, '/community-drops');
+});
 /*
 // Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
 app.get(…, async function (request, response) {

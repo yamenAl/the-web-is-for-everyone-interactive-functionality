@@ -77,6 +77,8 @@ app.get('/exercise/:id', async function (request, response) {
   const exerciseResponseJSON = await exerciseResponse.json()
 
   response.render('exercise.liquid', {
+    title: "exercise",
+
     exercises: exercisesData.data,
 
     specificExercise: exerciseResponseJSON.data
@@ -84,21 +86,64 @@ app.get('/exercise/:id', async function (request, response) {
    });
 });
 
-app.get('/community-drops/:id', async function (request, response) {
-  const messagesId = request.params.id;
-  const messagesIdResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages/?fields=*.*&filter={"id":"${messagesId}"}&limit=1`)
-  const messagesResponseJSON = await messagesIdResponse.json()
+app.get('/community-drops/exercise/:exerciseId', async function (request, response) {
+  const exerciseId = request.params.exerciseId;
+  const taskId = request.params.id;
 
-  const exerciseId = request.params.id;
-  const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
-  const exerciseResponseJSON = await exerciseResponse.json()
+
+  const relatedMessagesResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages/?filter={"exercise":${exerciseId}}`);
+  const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/${exerciseId}`);
+  const specificTaskResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_task/?filter={"id":${taskId}}`);
+
+  
+  const relatedMessagesJSON = await relatedMessagesResponse.json();
+  const exerciseData = await exerciseResponse.json();
+  const specificTaskData = await specificTaskResponse.json();
+  const taskObject = Array.isArray(specificTaskData.data) ? specificTaskData.data[0] : specificTaskData.data;
+
+
   response.render('community-drops.liquid', {
     title: "community-drops",
+    messages: relatedMessagesJSON.data,
+    exerciseId: exerciseId,
+    taskObject:taskObject,
+    
+    exercise: exerciseData.data
+  });
+});
+
+app.get('/community-drops/:id', async function (request, response) {
+  const messagesId = request.params.id;
+  const taskId = request.params.id;
+
+
+  const messagesFilterResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"_and":[{"exercise":{"_eq":"${messagesId}"}}]}`)
+  const messagesFilterResponseJSON = await messagesFilterResponse.json();
+
+  const messagesIdResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages/?filter={"id":"${messagesId}"}&limit=1`);
+  const messagesResponseJSON = await messagesIdResponse.json();
+  const messageObject = Array.isArray(messagesResponseJSON.data) ? messagesResponseJSON.data[0] : messagesResponseJSON.data;
+
+  const relatedMessagesResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages/?filter={"exercise":${messageObject.exercise}}`);
+  const relatedMessagesJSON = await relatedMessagesResponse.json();
+
+  const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${messageObject.exercise}"}&limit=1`);
+  const exerciseResponseJSON = await exerciseResponse.json();
+
+  const specificTaskResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_task/?filter={"id":${taskId}}`);
+  const specificTaskData = await specificTaskResponse.json();
+  const taskObject = Array.isArray(specificTaskData.data) ? specificTaskData.data[0] : specificTaskData.data;
+
+  response.render('community-drops.liquid', {
+    title: "community-drops",
+    messagesFilter:messagesFilterResponseJSON.data,
     specificmessage: messagesResponseJSON.data,
-    specificexercise:exerciseResponseJSON.data,
-    messages: messagesData.data
-  })
-})
+    specificexercise: exerciseResponseJSON.data,
+    messageObject: messageObject,
+    taskObject:taskObject,
+    messages: relatedMessagesJSON.data 
+  });
+});
 
 app.post('/community-drops/:id', async function (request, response) {
 
@@ -116,6 +161,7 @@ app.post('/community-drops/:id', async function (request, response) {
  // Redirect de gebruiker daarna naar een logische volgende stap
   response.redirect(303, '/community-drops');
 })
+
 
 /*
 // Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()

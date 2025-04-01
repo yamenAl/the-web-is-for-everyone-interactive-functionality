@@ -68,9 +68,6 @@ app.get('/:id', async function (request, response) {
 
 
 
-
-
-
 app.get('/exercise/:id', async function (request, response) {
   const exerciseId = request.params.id;
   const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
@@ -88,40 +85,40 @@ app.get('/exercise/:id', async function (request, response) {
 
 
 
-// GET route for community-drops
-app.get('/community-drops/:id', async function (request, response) {
-  const id = request.params.id;
+// GET route for community-drops 
+//const messagesIdResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"id":{"_eq":${id}}}&limit=1`);
+  //const messagesResponseJSON = await messagesIdResponse.json();
+  //const messageObject = Array.isArray(messagesResponseJSON.data) ? messagesResponseJSON.data[0] : messagesResponseJSON.data;
 
-  const messagesFilterResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"exercise":{"_eq":${id}}}`);
+ // const relatedMessagesResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"exercise":{"_eq":${messageObject}}}`);
+ // const relatedMessagesJSON = await relatedMessagesResponse.json();
+
+ // const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise?filter={"id":{"_eq":${messageObject}}}&limit=1`);
+  //const exerciseResponseJSON = await exerciseResponse.json();
+ // const exerciseResponseJSONObject = Array.isArray(exerciseResponseJSON.data) ? exerciseResponseJSON.data[0] : exerciseResponseJSON.data;
+
+
+
+ app.get('/community-drops/:id', async function (request, response) {
+  const messagesId = request.params.id;
+  const messagesIdResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages/?fields=*.*&filter={"exercise":"${messagesId}"}&limit=1`)
+  const messagesResponseJSON = await messagesIdResponse.json()
+  
+  const messagesFilterResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"exercise":{"_eq":${messagesId}}}`);
   const messagesFilterResponseJSON = await messagesFilterResponse.json();
 
-  const messagesIdResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"id":{"_eq":${id}}}&limit=1`);
-  const messagesResponseJSON = await messagesIdResponse.json();
-  const messageObject = Array.isArray(messagesResponseJSON.data) ? messagesResponseJSON.data[0] : messagesResponseJSON.data;
-
-  const relatedMessagesResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"exercise":{"_eq":${messageObject}}}`);
-  const relatedMessagesJSON = await relatedMessagesResponse.json();
-
-  const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise?filter={"id":{"_eq":${messageObject}}}&limit=1`);
-  const exerciseResponseJSON = await exerciseResponse.json();
-  const exerciseResponseJSONObject = Array.isArray(exerciseResponseJSON.data) ? exerciseResponseJSON.data[0] : exerciseResponseJSON.data;
-
-
-  const specificTaskResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_task?filter={"id":{"_eq":${id}}}`);
-  const specificTaskData = await specificTaskResponse.json();
-  const taskObject = Array.isArray(specificTaskData.data) ? specificTaskData.data[0] : specificTaskData.data;
-
+  const exerciseId = request.params.id;
+  const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
+  const exerciseResponseJSON = await exerciseResponse.json()
   response.render('community-drops.liquid', {
     title: "community-drops",
-    messagesFilter: messagesFilterResponseJSON.data,
     specificmessage: messagesResponseJSON.data,
-    specificexercise: exerciseResponseJSON.data,
-    messageObject,
-    taskObject,
-    exerciseResponseJSONObject,
-    messages: relatedMessagesJSON.data
-  });
-});
+    specificexercise:exerciseResponseJSON.data,
+    messagesFilter: messagesFilterResponseJSON.data,
+    messages: messagesData.data
+  })
+})
+
 app.post('/community-drops/:id', async function (request, response) {
   const exerciseId = request.params.id
 
@@ -137,7 +134,7 @@ app.post('/community-drops/:id', async function (request, response) {
     }
   });
  // Redirect de gebruiker daarna naar een logische volgende stap
- response.redirect(303, `/community-drops/${request.params.id}`);
+  response.redirect(303, `/community-drops/${request.params.id}`);
 })
 
 //delete check this again

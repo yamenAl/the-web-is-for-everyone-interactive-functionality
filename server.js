@@ -85,17 +85,7 @@ app.get('/exercise/:id', async function (request, response) {
 
 
 
-// GET route for community-drops 
-//const messagesIdResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"id":{"_eq":${id}}}&limit=1`);
-  //const messagesResponseJSON = await messagesIdResponse.json();
-  //const messageObject = Array.isArray(messagesResponseJSON.data) ? messagesResponseJSON.data[0] : messagesResponseJSON.data;
 
- // const relatedMessagesResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"exercise":{"_eq":${messageObject}}}`);
- // const relatedMessagesJSON = await relatedMessagesResponse.json();
-
- // const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise?filter={"id":{"_eq":${messageObject}}}&limit=1`);
-  //const exerciseResponseJSON = await exerciseResponse.json();
- // const exerciseResponseJSONObject = Array.isArray(exerciseResponseJSON.data) ? exerciseResponseJSON.data[0] : exerciseResponseJSON.data;
 
 
  app.get('/messages/:id', async function (request, response) {
@@ -248,44 +238,7 @@ app.post('/community-drops', async function (request, response) {
 
   response.redirect(303, '/community-drops');
 });
-/*
-// Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
-app.get(…, async function (request, response) {
-  
-  // Zie https://expressjs.com/en/5x/api.html#res.render over response.render()
-  response.render(…)
-})
-*/
 
-/*
-// Zie https://expressjs.com/en/5x/api.html#app.post.method over app.post()
-app.post(…, async function (request, response) {
-
-  // In request.body zitten alle formuliervelden die een `name` attribuut hebben in je HTML
-  console.log(request.body)
-
-  // Via een fetch() naar Directus vullen we nieuwe gegevens in
-
-  // Zie https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch over fetch()
-  // Zie https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify over JSON.stringify()
-  // Zie https://docs.directus.io/reference/items.html#create-an-item over het toevoegen van gegevens in Directus
-  // Zie https://docs.directus.io/reference/items.html#update-an-item over het veranderen van gegevens in Directus
-  await fetch(…, {
-    method: …,
-    body: JSON.stringify(…),
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
-    }
-  });
-
-  // Redirect de gebruiker daarna naar een logische volgende stap
-  // Zie https://expressjs.com/en/5x/api.html#res.redirect over response.redirect()
-  response.redirect(303, …)
-})
-*/
-
-
-// Stel het poortnummer in waar Express op moet gaan luisteren
 // Lokaal is dit poort 8000; als deze applicatie ergens gehost wordt, waarschijnlijk poort 80
 app.set('port', process.env.PORT || 8000)
 

@@ -1,0 +1,75 @@
+{% render 'partials/head.liquid' %}
+<main>
+
+
+
+    {% for message in specificexercise %}
+      <section>
+        <a href="/community-drops/{{ message.id }}">
+        <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+        <title>Go back</title>
+        <path d="M17 9H5.414l3.293-3.293a.999.999 0 10-1.414-1.414l-5 5a.999.999 0 000 1.414l5 5a.997.997 0 001.414 0 .999.999 0 000-1.414L5.414 11H17a1 1 0 100-2z" fill="#5C5F62"/>
+        </svg>
+        <h1>Community Drops</h1></a>
+        <p>
+          Deel wat je van de oefening vond, lees ervaringen van anderen en steun elkaar in de reis door rouw. <strong>Je bent niet alleen.</strong> 
+        </p>
+      </section>
+      <article>
+        <h2>Nieuwste berichten</h2>
+      </article>
+
+
+    {% endfor %}
+  
+    {% for message in messagesFilter %}
+      <article class="rouwtaak-card">
+        <ul>
+            <li>
+                <div class="cont-ball">
+                    {% for item in specificexercise %}
+                    <span class="them-{{ item.task.id }} ball"></span>
+                    {% endfor %}
+                </div>
+            </li>
+            <li>
+                <h3>{{ message.from }}</h3>
+            </li>
+        </ul> 
+       
+        <p>Op {{ message.date_created | date: "%-d %B" }}</p>
+        <p class="">
+            {{ message.text }}
+        </p>
+      </article>  
+    {% endfor %}
+
+    {% for message in specificexercise %}
+        <form method="POST" action="/messages/{{ message.id }}">
+        <input type="hidden" name="exercise" value="{{ message.id }}">
+        <article id="nameField">
+          <label>Naam</label>
+          <input type="text" name="from" id="fromInput" placeholder="name" required>
+        </article>
+        <label>
+          <input type="checkbox" id="anonymousCheck"> Bericht anoniem plaatsen
+        </label>
+        
+        <label>Uw Bericht</label>
+        <textarea name="text"  placeholder="Deel UW ervaring met ons.!!" required></textarea>
+        <button type="submit">Ervaring Delen</button>
+        <a class="start-btn-black" href="/messages/{{ message.id }}">Misschien later</a>
+  
+        </form>
+  
+  
+      {% endfor %}       
+       
+    
+
+</main>
+
+
+
+
+{% render 'partials/foot.liquid' %}

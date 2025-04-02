@@ -50,14 +50,18 @@
         <label>Naam</label>
         <input type="text" name="from" id="fromInput" placeholder="name" required>
       </article>
-    
       <label>
         <input type="checkbox" id="anonymousCheck"> Bericht anoniem plaatsen
       </label>
+      
       <label>Uw Bericht</label>
       <textarea name="text"  placeholder="Deel UW ervaring met ons.!!" required></textarea>
       <button type="submit">Ervaring Delen</button>
+      <a class="start-btn-black" href="/messages/{{ message.id }}">Misschien later</a>
+
       </form>
+
+
     {% endfor %}       
     
   

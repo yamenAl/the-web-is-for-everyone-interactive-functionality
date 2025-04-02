@@ -98,8 +98,7 @@ app.get('/exercise/:id', async function (request, response) {
  // const exerciseResponseJSONObject = Array.isArray(exerciseResponseJSON.data) ? exerciseResponseJSON.data[0] : exerciseResponseJSON.data;
 
 
-
- app.get('/community-drops/:id', async function (request, response) {
+ app.get('/messages/:id', async function (request, response) {
   const messagesId = request.params.id;
   const messagesIdResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages/?fields=*.*&filter={"exercise":"${messagesId}"}&limit=1`)
   const messagesResponseJSON = await messagesIdResponse.json()
@@ -110,12 +109,89 @@ app.get('/exercise/:id', async function (request, response) {
   const exerciseId = request.params.id;
   const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
   const exerciseResponseJSON = await exerciseResponse.json()
-  response.render('community-drops.liquid', {
-    title: "community-drops",
+
+  
+
+  
+  response.render('messages.liquid', {
+    title: "messages",
     specificmessage: messagesResponseJSON.data,
     specificexercise:exerciseResponseJSON.data,
     messagesFilter: messagesFilterResponseJSON.data,
     messages: messagesData.data
+  })
+})
+
+app.post('/messages/:id', async function (request, response) {
+  const exerciseId = request.params.id
+
+  await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
+    method: 'POST',
+    body: JSON.stringify({
+      from: request.body.from,
+      exercise: request.body.exercise, 
+      text: request.body.text
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+ // Redirect de gebruiker daarna naar een logische volgende stap
+  response.redirect(303, `/messages/${request.params.id}`);
+})
+
+//delete check this again
+app.post('/messages', async function (request, response) {
+  //this Const ask chatgpt about
+  const { _method, messageId, from, text, exercise } = request.body;
+
+  if (_method === 'DELETE') {
+    if (messageId) {
+      await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages/${messageId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        }
+      });
+    }
+    return response.redirect(303, '/messages');
+  }
+
+
+  await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
+    method: 'POST',
+    body: JSON.stringify({
+      from,
+      text,
+      exercise
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+
+  response.redirect(303, '/messages');
+});
+
+
+
+
+
+
+
+
+
+ app.get('/community-drops/:id', async function (request, response) {
+ 
+
+  const exerciseId = request.params.id;
+  const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
+  const exerciseResponseJSON = await exerciseResponse.json()
+
+  response.render('community-drops.liquid', {
+    title: "community-drops",
+    specificexercise:exerciseResponseJSON.data,
+
   })
 })
 
@@ -134,7 +210,7 @@ app.post('/community-drops/:id', async function (request, response) {
     }
   });
  // Redirect de gebruiker daarna naar een logische volgende stap
-  response.redirect(303, `/community-drops/${request.params.id}`);
+  response.redirect(303, `/community-drops/${exerciseId}`);
 })
 
 //delete check this again

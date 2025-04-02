@@ -11,3 +11,18 @@ anonymousCheckbox.addEventListener('change', () => {
     fromInput.value = '';                     
   }
 });
+//pop uo
+  document.addEventListener('DOMContentLoaded', () => {
+    const popup = document.getElementById('messagePopup');
+    const textarea = document.getElementById('dropTextarea');
+
+    textarea.addEventListener('focus', () => {
+      popup.classList.add('show');
+    });
+
+    // Optional: hide popup when clicking outside or blur
+    // textarea.addEventListener('blur', () => {
+    //   popup.classList.remove('show');
+    // });
+  });
+

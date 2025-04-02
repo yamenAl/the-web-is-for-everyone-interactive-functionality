@@ -124,6 +124,8 @@ app.get('/exercise/:id', async function (request, response) {
 
 app.post('/messages/:id', async function (request, response) {
   const exerciseId = request.params.id
+  console.log(request.body)
+
 
   await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
     method: 'POST',
@@ -137,7 +139,7 @@ app.post('/messages/:id', async function (request, response) {
     }
   });
  // Redirect de gebruiker daarna naar een logische volgende stap
-  response.redirect(303, `/messages/${request.params.id}`);
+  response.redirect(303, `/messages/${exerciseId}`);
 })
 
 //delete check this again
@@ -197,7 +199,7 @@ app.post('/messages', async function (request, response) {
 
 app.post('/community-drops/:id', async function (request, response) {
   const exerciseId = request.params.id
-
+  console.log(request.body)
   await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
     method: 'POST',
     body: JSON.stringify({
@@ -208,6 +210,7 @@ app.post('/community-drops/:id', async function (request, response) {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
     }
+    
   });
  // Redirect de gebruiker daarna naar een logische volgende stap
   response.redirect(303, `/community-drops/${exerciseId}`);

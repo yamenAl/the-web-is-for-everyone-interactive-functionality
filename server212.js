@@ -184,3 +184,40 @@ app.use((req, res, next) => {
 })
 
 
+app.get('/community-drops/:id', async function (request, response) {
+  const id = request.params.id;
+
+  const messagesFilterResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"exercise":{"_eq":${id}}}`);
+  const messagesFilterResponseJSON = await messagesFilterResponse.json();
+
+  
+
+  const specificTaskResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_task?filter={"id":{"_eq":${id}}}`);
+  const specificTaskData = await specificTaskResponse.json();
+  const taskObject = Array.isArray(specificTaskData.data) ? specificTaskData.data[0] : specificTaskData.data;
+
+  response.render('community-drops.liquid', {
+    title: "community-drops",
+    messagesFilter: messagesFilterResponseJSON.data,
+  
+    taskObject,
+
+  });
+});
+app.post('/community-drops/:id', async function (request, response) {
+  const exerciseId = request.params.id
+
+  await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
+    method: 'POST',
+    body: JSON.stringify({
+      from: request.body.from,
+      exercise: request.body.exercise, 
+      text: request.body.text
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+ // Redirect de gebruiker daarna naar een logische volgende stap
+ response.redirect(303, `/community-drops/${exerciseId}`);
+})

@@ -1,23 +1,24 @@
 
 header {
-    display: grid;
-    background-color: var(--background-color);
-    gap: 0.5rem;
-    align-items: center;
-    justify-content: center;
-    border-bottom: var(--border);
-    padding: 20px;
-  }
-  header ul{
-    display: flex;
-    gap: 1em; 
-    border: 2em;
-    list-style: none;
-  }
-  
-  header p {
-    font-size: 0.625rem;
-  }
+  display: flex; /* use flex instead of grid for horizontal layout */
+  flex-direction: column; /* keep items stacking vertically */
+  background-color: var(--background-color);
+  border-bottom: var(--border);
+  padding: 20px;
+  width: 100vw; /* full width */
+  box-sizing: border-box;
+}
+
+header ul.inline {
+  display: flex;
+  justify-content: space-between; /* push title to left, toggle to right */
+  align-items: center;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
   
   .menu-toggle {
     background-color: var(--blue);

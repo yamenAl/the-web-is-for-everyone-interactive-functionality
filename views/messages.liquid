@@ -23,6 +23,7 @@
     {% endfor %}
   
     {% for message in messagesFilter %}
+      {{ message |  json }}
       <article class="rouwtaak-card">
         <ul>
             <li>

@@ -5,12 +5,13 @@
 
     {% for message in specificexercise %}
       <section>
-        <a href="/exercise/{{ message.id }}">
-        <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-        <title>Go back</title>
-        <path d="M17 9H5.414l3.293-3.293a.999.999 0 10-1.414-1.414l-5 5a.999.999 0 000 1.414l5 5a.997.997 0 001.414 0 .999.999 0 000-1.414L5.414 11H17a1 1 0 100-2z" fill="#5C5F62"/>
-        </svg>
-        <h1> {{ message.title }}</h1></a>
+        <a href="/exercise/{{ message.id }}" class="back-link">
+          <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <title>Go back</title>
+            <path d="M17 9H5.414l3.293-3.293a.999.999 0 10-1.414-1.414l-5 5a.999.999 0 000 1.414l5 5a.997.997 0 001.414 0 .999.999 0 000-1.414L5.414 11H17a1 1 0 100-2z" fill="#5C5F62"/>
+          </svg>
+          <h1>{{ message.title }}</h1>
+        </a>
       </section>
 
         <article >
@@ -35,34 +36,48 @@
   
 
     {% endfor %}
-
-    <section>
-      Je hebt zojuist een mooie stap volbracht. 
-      <P>Wil je anderen steunen door je gevoelens 
-        over deze oefening te delen? </P>
-    </section>
-
+    <textarea name="text" id="dropTextarea" placeholder="Laat een community drop achter en verspreid kracht." required></textarea>
     {% for message in specificexercise %}
-      <h1>{{ message.exercise }}</h1>        
-      <form method="POST" action="/community-drops/{{ message.id }}">
-      <input type="hidden" name="exercise" value="{{ message.id }}">
-      <article id="nameField">
-        <label>Naam</label>
-        <input type="text" name="from" id="fromInput" placeholder="name" required>
-      </article>
-      <label>
-        <input type="checkbox" id="anonymousCheck"> Bericht anoniem plaatsen
-      </label>
+
+    <section class="bottom-popup" id="messagePopup">
+      <h3>Toegevoegd aan   <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 7.33542C8 9.79014 6.45472 11.3354 4 11.3354C1.54528 11.3354 0 9.79014 0 7.33542C0 4.70125 2.8675 1.14514 3.74694 0.11653C3.77824 0.0799843 3.81707 0.050646 3.86078 0.0305307C3.90448 0.0104155 3.95203 0 4.00014 0C4.04825 0 4.09579 0.0104155 4.1395 0.0305307C4.18321 0.050646 4.22204 0.0799843 4.25333 0.11653C5.1325 1.14514 8 4.70125 8 7.33542Z" fill="#F5F5F5"/>
+      <path d="M6.23829 7.68823C6.23829 8.21906 6.02742 8.72814 5.65207 9.10349C5.27672 9.47883 4.76764 9.6897 4.23682 9.6897" fill="#F5F5F5"/>
+      <path d="M6.23829 7.68823C6.23829 8.21906 6.02742 8.72814 5.65207 9.10349C5.27672 9.47883 4.76764 9.6897 4.23682 9.6897" stroke="#111111" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+        Drops </h3>
+        <a href="/community-drops/{{ message.task.id }}" class="close-button">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+            <title>close</title>
+            <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12l-4.89 4.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4z"/>
+          </svg>
+        </a>
+
+
+
+          <h1>Je hebt zojuist een mooie stap volbracht.</h1>
+          <p>Wil je anderen steunen door je gevoelens over deze oefening te delen?</p>
+
+          <h1>{{ message.exercise }}</h1>
+          <form method="POST" action="/messages/{{ message.id }}">
+            <input type="hidden" name="exercise" value="{{ message.id }}">
+            
+            <article id="nameField">
+              <label>Naam</label>
+              <input type="text" name="from" id="fromInput" placeholder="name" required>
+            </article>
+
+            <textarea name="text" id="dropTextarea" placeholder="Laat een community drop achter en verspreid kracht." required></textarea>
       
-      <label>Uw Bericht</label>
-      <textarea name="text"  placeholder="Deel UW ervaring met ons.!!" required></textarea>
-      <button type="submit">Ervaring Delen</button>
-      <a class="start-btn-black" href="/messages/{{ message.id }}">Misschien later</a>
+            <button type="submit">Ervaring Delen</button>
+            <a class="start-btn-black" href="/messages/{{ message.id }}">Misschien later</a><br>
 
-      </form>
-
-
-    {% endfor %}       
+            <label>
+              <input type="checkbox" id="anonymousCheck"> Bericht anoniem plaatsen
+            </label>
+          </form>
+      {% endfor %}
+    </section>
     
   
 </main>

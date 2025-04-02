@@ -36,14 +36,24 @@
 
     {% endfor %}
 
+    <section>
+      Je hebt zojuist een mooie stap volbracht. 
+      <P>Wil je anderen steunen door je gevoelens 
+        over deze oefening te delen? </P>
+    </section>
+
     {% for message in specificexercise %}
-      <p>exercise ID {{ message.id }}</p>
       <h1>{{ message.exercise }}</h1>        
       <form method="POST" action="/community-drops/{{ message.id }}">
-
-      <label>Naam</label>
       <input type="hidden" name="exercise" value="{{ message.id }}">
-      <input type="text" name="from" placeholder="name" required>
+      <article id="nameField">
+        <label>Naam</label>
+        <input type="text" name="from" id="fromInput" placeholder="name" required>
+      </article>
+    
+      <label>
+        <input type="checkbox" id="anonymousCheck"> Bericht anoniem plaatsen
+      </label>
       <label>Uw Bericht</label>
       <textarea name="text"  placeholder="Deel UW ervaring met ons.!!" required></textarea>
       <button type="submit">Ervaring Delen</button>

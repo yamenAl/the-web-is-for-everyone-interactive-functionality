@@ -5,7 +5,7 @@
     <article class="rouwtaak-card">
           
           {% for exercise in specificExercise %}
-            <a href="/{{ exercise.id }}">
+            <a href="/{{ exercise.task.id }}">
             <svg viewBox="0 0 24 24" width="32" height="32" fill="#FFFF" xmlns="http://www.w3.org/2000/svg">
               <title>close</title>
               <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12l-4.89 4.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4z"/>
@@ -13,16 +13,16 @@
           </a>  
             <img src="https://fdnd-agency.directus.app/assets/{{ exercise.image.id }}" alt="{{ exercise.title }} foto">
         {% endfor %}
-        {% for messageId in specificExercise %}
-            <a href="/community-drops/{{ messageId.id }}">start {{ messageId.id }}</a>
-          {% endfor %}
+      
 
-        <article class="rouwtaak-card">
+    
+        {% for exercise in specificExercise %}
+          <article class="rouwtaak-card">
             <ul class="inline">
-                <li class="inline"><p>Schrijven</p>|</li>
+                <li class="inline"><p>{{ exercise.type }}</p>|</li>
                 <li class="inline">
                     <img src="/assets/icons/time.svg" alt="time icon">
-                    <p>25 min</p>
+                    <p>{{ exercise.duration }} min</p>
                 </li>
                 <li class="inline">
                     <img src="/assets/icons/community-drops-color.svg" alt="community-drops icon">
@@ -30,13 +30,16 @@
                 </li>
             </ul>
         </article>
-        {% for exercise in specificExercise %}
             <section>
               <h1>{{ exercise.title }}</h1>
               <p>{{ exercise.description }}</p>
             </section>
           {% endfor %}
+          {% for messageId in specificExercise %}
+            <a class="them-{{ messageId.task.id }}" href="/messages/{{ messageId.id }}">start {{ messageId.id }}</a>
+          {% endfor %}
     </article>
+    
 </main>
 {% render 'partials/footer.liquid' %}
 {% render 'partials/foot.liquid' %}

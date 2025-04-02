@@ -1,47 +1,53 @@
 <header>
+  <article class="inline">
+    <ul class="inline">
+      <li>
+        <section>
+          {% for title in tasks %}
+            {% if title.id == taskObject.id %}
+              <h1 >{{ title.title }}</h1>
+            {% endif %}
+          {% endfor %}
+        </section>
+      </li>
+      <li>
+        <a class="menu-toggle"> <svg width="32" height="32" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve" transform="matrix(6.123233995736766e-17,1,-1,6.123233995736766e-17,0,0)">
+        <path fill="#231F20" d="M15.563,40.836c0.195,0.195,0.451,0.293,0.707,0.293s0.512-0.098,0.707-0.293l15-15
+          c0.391-0.391,0.391-1.023,0-1.414l-15-15c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414l14.293,14.293L15.563,39.422
+          C15.172,39.813,15.172,40.446,15.563,40.836z"></path>
+        </svg>
+        </a>
+        
+      </li>
+    </ul>
+  </article>
 
-  <section>
-    {% for title in tasks %}
-      {% if title.id == taskObject.id %}
-        <h1 >{{ title.title }}</h1>
-      {% endif %}
-    {% endfor %}
-  </section>
 
-  <article class="progress-container">
+  <article class="progress-container inline">
     <progress value="10" max="100"></progress>
     <p>10% volbracht</p>
   </article>
-
-  <a class="menu-toggle fdnd-button">Menu</a>
-  <nav class="menu">
-    <ul class="nav-list">
-
-      <li class="menu-close">
-        <a href="#">
-          <svg viewBox="0 0 24 24" width="32" height="32" fill="#FFFF" xmlns="http://www.w3.org/2000/svg">
-            <title>close</title>
-            <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12l-4.89 4.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4z"/>
-          </svg>
-        </a>
-      </li>
   
-      {% for exercise in tasks %}
-        {% if exercise.id %}
-          <li>
-            <a 
-              class="nav-links xs" 
-              href="/{{ exercise.id }}" 
-              data-title="{{ exercise.title }}"
-            >
-              <img src="/assets/photos/rouwtaak-{{ exercise.theme }}.svg" alt="{{ exercise.title }} icon">
-              <p>{{ exercise.title }}</p>
-            </a>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </nav>
+  <nav class="menu">
+          <ul class="nav-list">
+            {% for exercise in tasks %}
+              {% if exercise.id %}
+                <li>
+                  <a 
+                    class="nav-links" 
+                    href="/{{ exercise.id }}" 
+                    data-title="{{ exercise.title }}"
+                  >
+                    <img src="/assets/photos/rouwtaak-{{ exercise.theme }}.svg" alt="{{ exercise.title }} icon">
+                    <p>{{ exercise.title }}</p>
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </nav>    
+
+ 
 
  
 </header>

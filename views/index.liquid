@@ -11,23 +11,25 @@
     </article>
 
     <article class="exercises-cont">
-        <p>Schrijven</p>
         {% for exercise in exercises %}
             {% if taskObject.exercise contains exercise.id %}
                 <ul class="rouwtaak-card">
                     <li class="img-container">
-                    <a href="/het-verlies-aanvaarden">
+                    <a href="/exercise/{{ exercise.id }}">
                     <img src="https://fdnd-agency.directus.app/assets/{{ exercise.image }}" class="{{ exercise.title }} img">
                     <a class="them-{{ taskObject.theme }} start-btn" href="/exercise/{{ exercise.id }}">Start oefening</a>
                     </li>                   
-                    <p>{{ exercise.id }}</p>
-                    <p>{{ exercise.title }}</p>
+                    <p>{{ exercise.type }}</p>
+                    <h3>{{ exercise.title }}</h3>
                     </li>
-                    <img src="/assets/icons/community-drops-color.svg" alt="community-drops icon">
-                    <p>47 community drops</p>
+                    <li class="inline">
+                        <img src="/assets/icons/community-drops-color.svg" alt="community-drops icon">
+                        <p>47 community drops</p>
+                    </li>
+                    
                     <li class="inline">     
                         <img src="/assets/icons/time.svg" alt="time icon">
-                        <P>25 min</P>
+                        <P>{{ exercise.duration }} min</P>
                     </li>
                     <li class="inline">     
                         <img src="/assets/icons/time.svg" alt="tips icon">

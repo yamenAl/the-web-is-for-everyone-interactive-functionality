@@ -31,11 +31,20 @@ main {
     gap: 1.75rem;
   }
   
-  /*@media (min-width: 48em) {
+
+  @media (min-width: 48em) {
     .exercises-cont {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
+
     }
-  }*/
+  }
+
+  @media (min-width: 64em) {
+    .exercises-cont {
+      grid-template-columns: repeat(3, 1fr);
+
+    }
+  }
   
   .rouwtaak-card {
     flex:1; /*check this*/
@@ -50,6 +59,15 @@ main {
     margin: 0 auto;
     list-style: none;
   }
+  .rouwtaak-card ul{
+    display: flex;
+    gap: 1em; 
+    border: 2em;
+    list-style: none;
+  }
+
+
+
   .img-container {
     position: relative;
     display: inline-block;
@@ -67,18 +85,8 @@ main {
     border-radius: 0.75rem 0.75rem 0 0;
   }
   
-  .start-oefening-btn {
-    background-color: var(--color-rouwtaak1);
-    color: white;
-    padding: var(--start-button-padding);
-    font-size: 0.9rem;
-    border: none;
-    border-radius: var(--start-button-radius);
-    text-decoration: none;
-    display: inline-block;
-  }
-  
-  .start-oefening-btn:hover {
+
+  .start-btn:hover {
     background-color: var(--color-rouwtaak2);
   }
   .rouwtaak-color{
@@ -97,19 +105,54 @@ main {
     width: 0.85rem;
     height: 0.85rem;
   }
+
+
+  .cont-ball {
+    display: flex;
+    gap: 0.25rem;
+  }
+  
+  .ball {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .top-views{
+    display: grid;
+    justify-content: center; 
+    align-items:center;
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
   footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 10%;
+    height: 8%;
     background-color: var(--background-color);
     text-align: center;
     padding: 0.5em;
     z-index: 101;
-    font-size: 0.875rem;
   }
   
-  footer li {
-    display: inline;
-    margin-right: 2em;
-  }  
+  footer ul {
+    display: flex;
+    justify-content: center; 
+    gap: 4em; 
+    border: 2em;
+    list-style: none;
+    align-items:center;
+  } 

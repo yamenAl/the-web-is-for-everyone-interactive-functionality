@@ -8,6 +8,12 @@ header {
     border-bottom: var(--border);
     padding: 20px;
   }
+  header ul{
+    display: flex;
+    gap: 1em; 
+    border: 2em;
+    list-style: none;
+  }
   
   header p {
     font-size: 0.625rem;
@@ -15,7 +21,6 @@ header {
   
   .menu-toggle {
     background-color: var(--blue);
-    color: white;
     padding: 0.5em 1.2em;
     font-size: 1em;
     border: none;
@@ -40,29 +45,24 @@ header {
     display: grid;
   }
   
-
   .menu ul {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: minmax(50px, 1fr);
-    gap: 1rem;
     list-style: none;
     justify-items: center;
     align-items: center;
-    overflow-x: auto;
   }
   
 
   .menu li a {
     display: block;
     padding: 0.5em 1em;
-    background-color: white;
     color: var(--blue);
     font-size: 1em;
     border-radius: 6px;
     text-decoration: none;
     text-align: center;
-    white-space: nowrap;
     transition: background-color 0.2s;
   }
   

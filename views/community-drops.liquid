@@ -1,41 +1,56 @@
 {% render 'partials/head.liquid' %}
 <main>
-    <h1>{{ specificexercise.test }}</h1>
-   
 
-    <h2>Berichten bij oefening {{ exercise.title }}</h2>
 
-    {% for message in messagesFilter %}
-      <article class="rouwtaak-card">
-        
-        {% if taskObject %}
-            <span class="them-{{ taskObject.theme }}">I</span>
-        {% endif %}
-        <h3>{{ message.from }}</h3>
-        <p>{{ message.exercise }}</p>
-        <p>Op {{ message.date_created | date: "%-d %B %H:%M" }}</p>
-        <p class="">
-            {{ message.text }}
+
+    {% for message in specificexercise %}
+      <section>
+        <a href="/exercise/{{ message.id }}">
+        <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+        <title>Go back</title>
+        <path d="M17 9H5.414l3.293-3.293a.999.999 0 10-1.414-1.414l-5 5a.999.999 0 000 1.414l5 5a.997.997 0 001.414 0 .999.999 0 000-1.414L5.414 11H17a1 1 0 100-2z" fill="#5C5F62"/>
+        </svg>
+        <h1> {{ message.title }}</h1></a>
+      </section>
+
+        <article >
+            <ul class="inline">
+                <li class="inline"><p>{{ message.type }}</p>|</li>
+                <li class="inline">
+                    <img src="/assets/icons/time.svg" alt="time icon">
+                    <p>{{ message.duration }} min</p>
+                </li>
+                <li class="inline">
+                    <img src="/assets/icons/community-drops-color.svg" alt="community-drops icon">
+                    <p>47 community drops</p> 
+                </li>
+            </ul>
+        </article>
+      </a>
+        <p>
+          In onderstaand veld kan je beginnen met schrijven. Je hoeft het niet in een keer af te schrijven, je kan het altijd op als concept op slaan en op een later moment aanvullen in 
+          <strong>Drops</strong>
         </p>
-      </article>
-      <form method="POST" action="/community-drops/{{ message.id }}">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="hidden" name="messageId" value="{{ message.id }}">
-      <button type="submit" onclick="return confirm('Weet je zeker dat je dit bericht wilt verwijderen?');">Verwijder bericht</button>
-      </form>
+      </section>
+  
+
     {% endfor %}
 
-    {% for message in specificmessage %}
-        <form method="POST" action="/community-drops/{{ message.exercise }}">
-        <label>Naam</label>
-        <input type="hidden" name="exercise" value="{{ message.id }}">
-        <input type="text" name="from" placeholder="name" required>
-        <label>Uw Bericht</label>
-        <textarea name="text"  placeholder="Deel UW ervaring met ons.!!" required></textarea>
-        <button type="submit">Ervaring Delen</button>
-        </form>
+    {% for message in specificexercise %}
+      <p>exercise ID {{ message.id }}</p>
+      <h1>{{ message.exercise }}</h1>        
+      <form method="POST" action="/community-drops/{{ message.id }}">
+
+      <label>Naam</label>
+      <input type="hidden" name="exercise" value="{{ message.id }}">
+      <input type="text" name="from" placeholder="name" required>
+      <label>Uw Bericht</label>
+      <textarea name="text"  placeholder="Deel UW ervaring met ons.!!" required></textarea>
+      <button type="submit">Ervaring Delen</button>
+      </form>
     {% endfor %}       
     
+  
 </main>
 
 

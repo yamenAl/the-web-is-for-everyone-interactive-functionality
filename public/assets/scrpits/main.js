@@ -34,15 +34,8 @@ anonymousCheckbox.addEventListener('change', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const popup = document.getElementById('messagePopup');
   const textarea = document.getElementById('dropTextarea');
-  const closeBtn = document.querySelector('.close-button');
-
   textarea.addEventListener('focus', () => {
     popup.classList.add('show');
-  });
-
-  closeBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    popup.classList.remove('show');
   });
 });
 

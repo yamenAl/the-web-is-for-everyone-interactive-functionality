@@ -64,16 +64,18 @@ main {
     max-width: 100%;
     margin-bottom: 3em;
     padding: 1rem;
-    transition: transform 0.3s ease-in-out;
-    &:hover {
+  }
+    .hover-effect{
+      transition: transform 0.3s ease-in-out;
+      &:hover {
       transform: scale(1.05); 
     }
   
-    * {
+    *{
       transition: none !important; 
     }
-
   }
+    
   .rouwtaak-card ul{
     display: flex;
     gap: 1em; 

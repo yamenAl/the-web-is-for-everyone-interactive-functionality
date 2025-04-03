@@ -13,7 +13,7 @@
     <article class="exercises-cont">
         {% for exercise in exercises %}
             {% if taskObject.exercise contains exercise.id %}
-                <ul class="rouwtaak-card">
+                <ul class="rouwtaak-card hover-effect">
                     <li class="img-container">
                     <a href="/exercise/{{ exercise.id }}">
                     <img src="https://fdnd-agency.directus.app/assets/{{ exercise.image }}" alt="{{ exercise.title }} img">

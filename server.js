@@ -37,7 +37,6 @@ app.engine('liquid', engine.express());
 app.set('views', './views')
 
 
-console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe.')
 
 app.get('/:id', async function (request, response) {
   const taskId = request.params.id;
@@ -54,6 +53,7 @@ app.get('/:id', async function (request, response) {
   const specificTaskData = await specificTaskResponse.json();
   const taskObject = Array.isArray(specificTaskData.data) ? specificTaskData.data[0] : specificTaskData.data;
 
+  
   response.render('index.liquid', {
     title: 'index',
     tasks: tasksData.data, 
@@ -70,14 +70,21 @@ app.get('/:id', async function (request, response) {
 
 app.get('/exercise/:id', async function (request, response) {
   const exerciseId = request.params.id;
-  const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
+  const exerciseResponse = await fetch(`
+    https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
   const exerciseResponseJSON = await exerciseResponse.json()
+
+  const countResponse = await fetch(`
+    https://fdnd-agency.directus.app/items/dropandheal_messages?aggregate[count]=*&filter={"exercise":{"_eq":${exerciseId}}}`);
+  const countResponseJSON = await countResponse.json();
+  const messageCount = countResponseJSON.data[0].count;
 
   response.render('exercise.liquid', {
     title: "exercise",
 
     exercises: exercisesData.data,
 
+    countMessages:messageCount,
     specificExercise: exerciseResponseJSON.data
 
    });
@@ -90,16 +97,21 @@ app.get('/exercise/:id', async function (request, response) {
 
  app.get('/messages/:id', async function (request, response) {
   const messagesId = request.params.id;
-  const messagesIdResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages/?fields=*.*&filter={"exercise":"${messagesId}"}&limit=1`)
+  const messagesIdResponse = await fetch(`
+    https://fdnd-agency.directus.app/items/dropandheal_messages/?fields=*.*&filter={"exercise":"${messagesId}"}&limit=1`)
   const messagesResponseJSON = await messagesIdResponse.json()
   
-  const messagesFilterResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"exercise":{"_eq":${messagesId}}}`);
+  const messagesFilterResponse = await fetch(`
+    https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"exercise":{"_eq":${messagesId}}}`);
   const messagesFilterResponseJSON = await messagesFilterResponse.json();
 
   const exerciseId = request.params.id;
-  const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
+  const exerciseResponse = await fetch(`
+    https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
   const exerciseResponseJSON = await exerciseResponse.json()
 
+  
+    
   
 
   
@@ -128,6 +140,7 @@ app.post('/messages/:id', async function (request, response) {
       'Content-Type': 'application/json;charset=UTF-8'
     }
   });
+  //https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1  this for check msg keep in mind
  // Redirect de gebruiker daarna naar een logische volgende stap
   response.redirect(303, `/messages/${exerciseId}`);
 })
@@ -180,9 +193,16 @@ app.post('/messages', async function (request, response) {
   const exerciseResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_exercise/?fields=*.*&filter={"id":"${exerciseId}"}&limit=1`)
   const exerciseResponseJSON = await exerciseResponse.json()
 
+  const countResponse = await fetch(`
+    https://fdnd-agency.directus.app/items/dropandheal_messages?aggregate[count]=*&filter={"exercise":{"_eq":${exerciseId}}}`);
+  const countResponseJSON = await countResponse.json();
+  const messageCount = countResponseJSON.data[0].count;
+
   response.render('community-drops.liquid', {
     title: "community-drops",
     specificexercise:exerciseResponseJSON.data,
+    countMessages:messageCount
+
 
   })
 })

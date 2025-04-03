@@ -61,7 +61,7 @@
   }
   
   h1 {
-    font-size: clamp(1.50rem, 3vw, 2rem);
+    font-size: clamp(2rem, 3vw, 2rem);
     font-weight: bold;
   }
   
@@ -77,33 +77,64 @@
     font-size: clamp(0.85rem, 1.5vw, 1rem);
     color: var(--color-gray);
   }
-  
+
 
   .them-1, .them-blue {
     background-color: var(--color-rouwtaak1);
-
+    border: 1px solid var(--color-rouwtaak1);
+    &:hover {
+      background-color: var(--color-rouwtaak2);
+    }
   }
   
   .them-2, .them-red {
     background-color: var(--color-rouwtaak2);
+    border: 1px solid var(--color-rouwtaak2);
+    &:hover {
+      background-color: var(--color-rouwtaak3);
+    }
   }
   
   .them-3, .them-green {
     background-color: var(--color-rouwtaak3);
+    border: 1px solid var(--color-rouwtaak3);
  
+    &:hover {
+      background-color: var(--color-rouwtaak4);
+    }
   }
   
   .them-4, .them-purple {
     background-color: var(--color-rouwtaak4);
+    border: 1px solid var(--color-rouwtaak4);
 
+    &:hover {
+      background-color: var(--color-rouwtaak1);
+    }
   }
-  .them-blue, .them-red, .them-green, .them-purple{
+  .them-1,.them-2,.them-3,.them-4,.them-blue, .them-red, .them-green, .them-purple{
       color: var(--color-white);
+  }
+  .start-btn-black{
+    background-color: var(--background-color);
+  }
+  .border-black{
+    border-color: var(--background-color);
   }
 
 
 /*need look*/
-  
+  .btn-standard {
+    min-width: 5vh;
+    padding: var(--start-button-padding);
+    border-radius: var(--start-button-radius);
+    text-decoration: none;
+    z-index: 1;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    
+  }
+
+ 
   .start-btn {
     min-width: 5vh;
     position: absolute;
@@ -111,17 +142,34 @@
     right: 30px;
     padding: var(--start-button-padding);
     border-radius: var(--start-button-radius);
-    font-size: 1em;
     text-decoration: none;
     z-index: 1;
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     
   }
-  .start-btn-black{
-    padding: var(--start-button-padding);
-    border-radius: var(--start-button-radius);
-    text-decoration: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 
+  .form-btn{
+    position: fixed;
+    bottom: 1em;
+    left: 35%;
+  
+  }
 
+  .start.active {
+    background-color: #ff4081;
+    color: white;
+    animation: start-animation 0.5s ease-out;
+  }
+  
+  @keyframes start-animation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    }
+    100% {
+        transform: scale(1);
+    }
   }

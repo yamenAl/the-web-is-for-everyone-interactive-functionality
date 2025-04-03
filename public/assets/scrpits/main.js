@@ -1,3 +1,22 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll(".form-btn");
+
+  buttons.forEach(button => {
+    button.addEventListener("click", function () {
+      const targetId = this.dataset.target;
+      const formArticle = document.getElementById(targetId);
+
+      if (formArticle.style.display === "none") {
+        formArticle.style.display = "block";
+      } else {
+        formArticle.style.display = "none";
+      }
+    });
+  });
+});
+
+
+
 const anonymousCheckbox = document.getElementById('anonymousCheck');
 const nameField = document.getElementById('nameField');
 const fromInput = document.getElementById('fromInput');
@@ -12,17 +31,21 @@ anonymousCheckbox.addEventListener('change', () => {
   }
 });
 //pop uo
-  document.addEventListener('DOMContentLoaded', () => {
-    const popup = document.getElementById('messagePopup');
-    const textarea = document.getElementById('dropTextarea');
+document.addEventListener('DOMContentLoaded', () => {
+  const popup = document.getElementById('messagePopup');
+  const textarea = document.getElementById('dropTextarea');
+  const closeBtn = document.querySelector('.close-button');
 
-    textarea.addEventListener('focus', () => {
-      popup.classList.add('show');
-    });
-
-    // Optional: hide popup when clicking outside or blur
-    // textarea.addEventListener('blur', () => {
-    //   popup.classList.remove('show');
-    // });
+  textarea.addEventListener('focus', () => {
+    popup.classList.add('show');
   });
 
+  closeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    popup.classList.remove('show');
+  });
+});
+
+function toggleActive() {
+  document.querySelector('.form-btn').classList.toggle('active');
+}

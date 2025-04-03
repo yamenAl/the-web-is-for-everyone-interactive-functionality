@@ -34,8 +34,9 @@ main {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
+   
   }
-  
+
 
   @media (min-width: 48em) {
     .exercises-cont {
@@ -50,6 +51,7 @@ main {
 
     }
   }
+
   
   .rouwtaak-card {
    /* flex:1; /*check this */
@@ -62,6 +64,14 @@ main {
     max-width: 100%;
     margin-bottom: 3em;
     padding: 1rem;
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.05); 
+    }
+  
+    * {
+      transition: none !important; 
+    }
 
   }
   .rouwtaak-card ul{
@@ -240,7 +250,6 @@ main {
     right: 20px; 
     display: flex;
     flex-direction: column;
-    font-family: var(--font-family-text);
     animation: slideInFade 2s ease forwards, slideOutFade 1s ease 20s forwards; 
 
     p { 

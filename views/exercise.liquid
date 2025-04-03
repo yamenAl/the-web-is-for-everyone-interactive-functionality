@@ -24,7 +24,7 @@
     <article class="rouwtaak-card">
        
         {% for exercise in specificExercise %}
-          <article class="rouwtaak-card">
+          <article>
             <ul class="inline">
                 <li class="inline"><p>{{ exercise.type }}</p>|</li>
                 <li class="inline">
@@ -43,7 +43,8 @@
             </section>
           {% endfor %}
           {% for messageId in specificExercise %}
-            <a class="them-{{ messageId.task.id }}" href="/community-drops/{{ messageId.id }}">start {{ messageId.id }}</a>
+            <a class="them-{{ messageId.task.id }} btn-standard" href="/community-drops/{{ messageId.id }}">Start</a>
+
           {% endfor %}
     </article>
     

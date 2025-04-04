@@ -45,7 +45,13 @@
         <p class="">
             {{ message.text }}
         </p>
-      </article>  
+        <form method="POST" action="/messages/{{ message.exercise }}">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="messageId" value="{{ message.id }}">
+        <button class="btn-standard" type="submit" onclick="return confirm('Weet je zeker dat je dit bericht wilt verwijderen?');">Verwijder bericht</button>
+        </form>
+      </article>
+     
     {% endfor %}
     
 
